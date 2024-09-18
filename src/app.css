@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind utilities;
 @tailwind components;
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/Inter.woff2') format('woff2');
+  font-display: swap;
+}
+
+body,
+html {
+  @apply bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50;
+  font-family: 'Inter', sans-serif;
+}

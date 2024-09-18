@@ -1,7 +1,9 @@
 <script>
   import Button from '$lib/ui/Button.svelte'
   import GridItem from '$lib/ui/GridItem.svelte'
-  import { ArrowRight } from 'lucide-svelte'
+  import Comment from '$lib/ui/mock/Comment.svelte'
+  import Post from '$lib/ui/mock/Post.svelte'
+  import { ArrowRight, KeyRound, GalleryHorizontalEnd, Command, Link, Image, Heart, Paintbrush, Code, Newspaper } from 'lucide-svelte'
 </script>
 
 <div class="flex flex-col items-center min-h-screen">
@@ -12,57 +14,82 @@
      sm:max-w-sm mx-4" author="Xylight@lemdro.id" body="Imma go fishing by the lake near me, there's like nobody there so it's very nice" />
   </div> -->
   <header
-    class="flex flex-col p-8 items-center justify-center text-center
-    prose prose-xl prose-zinc dark:prose-invert
-    prose-h1:mb-0 prose-p:max-w-lg h-96 relative"
+    class="flex flex-col p-8 xl:py-16
+    prose prose-xl xl:prose-2xl prose-zinc dark:prose-invert
+    prose-h1:mb-0 prose-h1:font-medium tracking-tight
+    prose-p:max-w-lg xl:prose-p:max-w-xl h-96 relative
+    w-full"
   >
     <h1>
-      Discover the fediverse like <span
-        class="bg-gradient-to-r text-transparent bg-clip-text from-red-500 to-purple-600"
-      >
-        never before.
-      </span>
+      <span class="bg-gradient-to-r text-transparent bg-clip-text from-red-400 to-purple-500">Discover</span> the fediverse.
     </h1>
     <p class="">
       Photon is a better way to discover Lemmy, with an intuitive user experience and
       a beautiful design.
     </p>
-    <div class="flex gap-2">
+    <div class="flex gap-2 not-prose">
       <Button href="https://phtn.app" size="lg" color="primary">
         Try it out <ArrowRight size={16} />
       </Button>
-      <Button size="lg" href="#learn-more">Learn more</Button>
+      <Button color="tertiary" size="lg" href="#learn-more">Learn more</Button>
     </div>
   </header>
   <div class="perspective-container">
     <div class="perspective px-8 w-full rounded-xl
     border-b-0 rounded-b-none">
-      <img src="/img/desktop-default-dark.webp" class="perspective-child border border-zinc-200 dark:border-zinc-700 " alt="" />
+      <picture class="contents">
+        <source media="(prefers-color-scheme: dark)" srcset="/img/desktop-default-dark.webp">
+        <source media="(prefers-color-scheme: light)" srcset="/img/desktop-default-light.webp">
+        <img class="perspective-child border border-zinc-200 dark:border-zinc-700 " alt="" />
+      </picture>
     </div>
   </div>
+
+  <div class="mx-auto flex gap-2 items-center flex-wrap">
+    <Button color="tertiary" size="lg" href="https://github.com/xyphyn/photon">
+      <Code size={16} />
+      GitHub
+    </Button>
+    <Button color="tertiary" size="lg" href="https://phtn.app/c/photon@lemdro.id"
+    class="">
+      <Newspaper size={16} />
+      <span>Photon<span class="text-zinc-600 dark:text-zinc-400">@lemdro.id</span></span>
+    </Button>
+    <Button color="tertiary" size="lg" href="https://buymeacoffee.com/xylight">
+      <Heart size={16} />
+      Donate
+    </Button>
+  </div>
   <section
-    class="flex flex-col p-16 border-y border-zinc-200 dark:border-zinc-900
-    bg-slate-50 dark:bg-black w-full"
+    class="flex flex-col p-8 md:p-12 lg:p-16 2xl:px-32"
   >
-    <div class="prose prose-xl dark:prose-invert !max-w-full prose-zinc w-full">
-      <h1><span class="bg-gradient-to-r text-transparent from-red-500 to-purple-500 bg-clip-text">Discover</span> more</h1>
+    <div class="prose prose-lg dark:prose-invert !max-w-full prose-zinc w-full
+    prose-h1:font-medium">
+      <header>
+        <span></span>
+        <h1 class="font-medium">Discover more</h1>
+      </header>
       <p>
         Photon enriches each element of the platform, providing a more comprehensive media experience.
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 w-full
+      rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden">
         <GridItem class="w-full not-prose text-base">
-          {#snippet title()}
-          Multiple accounts
+          {#snippet label()}
+            <KeyRound size={16} /> Multiple accounts
           {/snippet}
-          Switch between different instances and profiles with just a click.
+          {#snippet title()}
+            Switch profiles instantly.
+          {/snippet}
+          Explore different instances quickly and easily.
           {#snippet demo()}
-            <div class="w-full h-32 flex flex-col px-4 overflow-hidden gap-px">
+            <div class="w-full min-h-32 flex flex-col px-4 overflow-hidden gap-px">
               {#snippet account(
                 // @ts-ignore
                 { name, instance, selected })}
-                <div class:bg-zinc-900={selected} class="flex flex-row items-center gap-1
-                p-2 px-3 rounded-lg cursor-pointer hover:dark:bg-zinc-800 transition-colors">
-                  <div class="h-6 w-6 rounded-full bg-zinc-600"></div>
+                <div class:bg-zinc-100={selected} class:dark:bg-zinc-900={selected} class="flex flex-row items-center gap-1
+                p-2 px-3 rounded-lg cursor-pointer hover:bg-zinc-50 hover:dark:bg-zinc-800 transition-colors">
+                  <div class="h-6 w-6 rounded-full bg-zinc-100 dark:bg-zinc-600"></div>
                   <div class="">
                     <div class="font-medium text-sm">{name}</div>
                     <div class="text-xs">{instance}</div>
@@ -77,8 +104,11 @@
           {/snippet}
         </GridItem>
         <GridItem class="w-full not-prose text-base">
+          {#snippet label()}
+            <GalleryHorizontalEnd size={16} /> Infinite scroll
+          {/snippet}
           {#snippet title()}
-            Infinite scroll
+            Find more without stopping.
           {/snippet}
           Seamlessly adds new posts as you scroll down. It's optional, if it's not your thing.
           {#snippet demo()}
@@ -98,43 +128,62 @@
           {/snippet}
         </GridItem>
         <GridItem class="w-full not-prose text-base">
-          {#snippet title()}
-            Command prompt
+          {#snippet label()}
+            <Command size={16} /> Command prompt
           {/snippet}
-          Change your settings, open a page, and search your subscriptions instantly in one prompt.
+          {#snippet title()}
+            Explore more, faster.
+          {/snippet}
+          Switch feeds, change your settings, open a page, and search your subscriptions instantly in one prompt.
+        </GridItem>
+        <GridItem class="w-full md:col-span-2 xl:col-span-3 not-prose
+        ">
+          {#snippet label()}
+            <Paintbrush size={16} /> UI design
+          {/snippet}
+          {#snippet title()}
+            A thoughtful user experience.
+          {/snippet}
+          <div class="max-w-3xl">
+            Photon has an opinionated design meant to be intuitive and appealing. Every component is carefully placed and designed to ensure the best experience.
+          </div>
         </GridItem>
         <GridItem class="w-full not-prose text-base">
-          {#snippet title()}
-            Rich embeds
+          {#snippet label()}
+            <Link size={16} /> Rich embeds
           {/snippet}
-          These embeds provide a quick preview of the destination content without distraction.
+          {#snippet title()}
+            Enhancing Lemmy's core: beautiful link aggregation.
+          {/snippet}
+          Rich embeds provide a quick preview of the destination content without distraction.
         </GridItem>
         <GridItem class="w-full not-prose text-base">
+          {#snippet label()}
+            <Image size={16} /> Rich media
+          {/snippet}
           {#snippet title()}
-            Rich media
+            Multimedia features.
           {/snippet}
           With inline YouTube videos, image actions, and more forms of media supported, Photon makes all types of content nice to use.
         </GridItem>
+        <GridItem class="w-full not-prose text-base">
+          {#snippet label()}
+            <Image size={16} /> View options
+          {/snippet}
+          {#snippet title()}
+            Choose your perfect view.
+          {/snippet}
+          Cozy mode is perfect for those who want a spacious and relaxed user experience, while compact mode is perfect for power users who want to scan more content at a glance.
+        </GridItem>
     </div>
   </section>
-  <section
-    class="flex flex-col p-16 border-b border-zinc-200 dark:border-zinc-900
-    bg-slate-50 dark:bg-zinc-950 w-full"
-  >
-    <div class="prose prose-xl dark:prose-invert prose-zinc w-full">
-      <h1>Highly <span class="bg-gradient-to-r text-transparent bg-clip-text from-red-500 to-purple-500">customizable</span></h1>
-      <p>Photon has countless settings and options to tweak to your liking. Whether you enjoy spacious or compact designs, a panel or dock, there's probably a setting for you.</p>
-    </div>
-  </section>
-  <section
-    class="flex flex-col p-16 border-b border-zinc-200 dark:border-zinc-900
-    bg-slate-50 dark:bg-black w-full"
-  >
-    <div class="prose prose-xl dark:prose-invert prose-zinc w-full">
-      <h1>A focus on <span class="bg-gradient-to-r text-transparent bg-clip-text from-red-500 to-purple-500">UX</span></h1>
-      <p>Every component of Photon is carefully designed and thoughtfully placed to be intuitive.</p>
-    </div>
-  </section>
+  <!-- <div class="flex flex-wrap">
+    <Post upvotes={72} comments={27} author="qaz@lemmy.world" community="196" title="Photon ftw rule" avatar="https://lemmy.blahaj.zone/pictrs/image/fwrQkf9edg.png?format=webp&thumbnail=64" image="https://pictrs.blahaj.zone/pictrs/image/8b06fcb0-140f-4bbe-b3bd-1c5929b0a427.png?format=webp" href="https://lemmy.world/post/12956274" />
+    <Comment author="Streamwave@feddit.uk" body="...Lemmy is fine. Especially with the Photon frontend." />
+  </div> -->
+  <footer class="prose prose-md dark:prose-invert prose-zinc">
+    <p>Made with ❤️ by Xylight</p>
+  </footer>
 </div>
 
 <style>
@@ -157,7 +206,7 @@
     width: 96rem;
   }
   
-  :global(.perspective-child) {
+  .perspective-child {
     transform: translateX(2%) scale(1.2) rotateX(47deg) rotateY(30deg) rotate(324deg);
     border-radius: 1rem;
     z-index: 10;

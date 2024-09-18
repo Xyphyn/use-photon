@@ -10,8 +10,8 @@
   }
 
   export const buttonColor = {
-    primary: `border border-transparent bg-zinc-900 text-white
-		 dark:bg-zinc-100 dark:text-black hover:brightness-125 dark:hover:brightness-90 active:brightness-90
+    primary: `border border-transparent bg-zinc-900 text-zinc-50 dark:text-zinc-900 
+		 dark:bg-zinc-100  hover:brightness-125 dark:hover:brightness-90 active:brightness-90
 		 active:dark:brightness-75`,
 
     secondary: `border border-slate-200 border-b-slate-300 dark:border-zinc-800 dark:border-t-zinc-700 bg-white dark:bg-zinc-900
@@ -109,7 +109,6 @@
     },
   }
 
-  export let loading = false
   export let submit = false
 
   export let color: ButtonColor = 'secondary'
@@ -139,16 +138,8 @@
       {buttonSize[size]}
       {buttonRounding[rounding][roundingSide]}
 			{buttonShadow[shadow]}
-      text-sm transition-all disabled:!opacity-70 disabled:!pointer-events-none
-      disabled:!border disabled:!border-slate-300 disabled:!bg-slate-200
-      disabled:dark:!border-zinc-700 disabled:dark:!bg-zinc-800 disabled:text-inherit
-      font-medium cursor-pointer !no-underline
-      {$$props.class}
-     {loading
-    ? color == 'primary'
-      ? '!bg-transparent !text-inherit'
-      : ''
-    : ''}"
+      text-sm transition-all font-medium cursor-pointer !no-underline 
+      {$$props.class}"
   type={submit ? 'submit' : 'button'}
 >
   <div

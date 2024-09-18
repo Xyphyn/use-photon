@@ -7,12 +7,11 @@
 
 <nav
   {...props}
-  class="flex items-center gap-1
-  bg-white/50 dark:bg-zinc-950/50 border border-zinc-200/50 dark:border-zinc-800/50
-p-4 py-3 rounded-full backdrop-blur-xl z-50 {className}"
+  class="flex items-center gap-2
+   {className}"
 >
   <Logo width={32} />
   <div class="flex-1"></div>
-  <Button color="tertiary" class="!text-base" rounding="pill">About</Button>
-  <Button color="primary" class="!text-base" rounding="pill">Try it</Button>
+  <Button href="#learn-more" color="tertiary">About</Button>
+  <Button href="https://phtn.app" color="primary">Try it</Button>
 </nav>

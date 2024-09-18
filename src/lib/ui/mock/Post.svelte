@@ -9,6 +9,9 @@
     image,
     author,
     avatar,
+    href,
+    upvotes,
+    comments,
     class: className = '',
   }: {
     title: string
@@ -18,10 +21,15 @@
     author: string
     avatar?: string
     class?: string
+    href?: string
+    upvotes?: number
+    comments?: number
   } = $props()
 </script>
 
-<div
+<svelte:element
+  this={href ? 'a' : 'div'}
+  {href}
   class="border rounded-2xl border-zinc-200
 dark:border-zinc-800 bg-white/30 dark:bg-zinc-900/30
 p-4 {className}"
@@ -78,7 +86,7 @@ p-4 {className}"
         class="text-inherit dark:text-inherit"
       >
         <ArrowBigUp size={20} strokeWidth={1.5} />
-        5.2K
+        {upvotes ?? '5.2K'}
       </Button>
       <Button
         rounding="pill"
@@ -86,7 +94,7 @@ p-4 {className}"
         class="text-inherit dark:text-inherit"
       >
         <MessageCircle size={18} strokeWidth={1.5} />
-        263
+        {comments ?? 523}
       </Button>
       <div class="flex-1"></div>
       <Button
@@ -99,7 +107,7 @@ p-4 {className}"
       </Button>
     </div>
   </div>
-</div>
+</svelte:element>
 
 <style>
   .meta {
