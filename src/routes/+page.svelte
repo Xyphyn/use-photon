@@ -16,16 +16,16 @@
   <header
     class="flex flex-col p-8 xl:py-16
     prose prose-xl xl:prose-2xl prose-zinc dark:prose-invert
-    prose-h1:mb-0 prose-h1:font-medium tracking-tight
+    prose-h1:mb-0 prose-h1:font-bold tracking-tight
     prose-p:max-w-lg xl:prose-p:max-w-xl h-96 relative
-    w-full"
+    w-full items-center text-center mb-24"
   >
     <h1>
-      <span class="bg-gradient-to-r text-transparent bg-clip-text from-red-400 to-purple-500">Discover</span> the fediverse.
+      <span class="bg-gradient-to-r text-transparent bg-clip-text from-purple-400 via-pink-400 to-orange-400">Discover the fediverse</span>
+      <br/>with Photon
     </h1>
     <p class="">
-      Photon is a better way to discover Lemmy, with an intuitive user experience and
-      a beautiful design.
+      A better way to discover Lemmy.
     </p>
     <div class="flex gap-2 not-prose">
       <Button href="https://phtn.app" size="lg" color="primary">
@@ -187,6 +187,42 @@
 </div>
 
 <style>
+  @keyframes moveInCircle {
+    0% {
+      transform: translate(
+        /* x = centerX + radius * cos(angle) */
+        calc(130px + 100 * cos(0deg)),
+        /* y = centerY + radius * sin(angle) */
+        calc(130px + 100 * sin(0deg))
+      );
+    }
+    25% {
+      transform: translate(
+        calc(130px + 100 * cos(90deg)),
+        calc(130px + 100 * sin(90deg))
+      );
+    }
+    50% {
+      transform: translate(
+        calc(130px + 100 * cos(180deg)),
+        calc(130px + 100 * sin(180deg))
+      );
+    }
+    75% {
+      transform: translate(
+        calc(130px + 100 * cos(270deg)),
+        calc(130px + 100 * sin(270deg))
+      );
+    }
+    100% {
+      transform: translate(
+        calc(130px + 100 * cos(360deg)),
+        calc(130px + 100 * sin(360deg))
+      );
+    }
+    /* ... and so on for other angles */
+  }
+
   .perspective-container {
     pointer-events: none;
     margin-top: -8rem;
