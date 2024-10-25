@@ -23,7 +23,13 @@
 <style lang="postcss">
 
   .border-shadow {
-    box-shadow: 0px 0px 0px 1px theme(colors.zinc.800);
+    box-shadow: 0px 0px 0px 1px theme(colors.zinc.100);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .border-shadow {
+      box-shadow: 0px 0px 0px 1px theme(colors.zinc.800);
+    }
   }
 
   /* .container:first-child > .border-shadow {

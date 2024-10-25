@@ -1,6 +1,9 @@
-<script>
+<script lang="ts">
   import Shell from '$lib/layout/Shell.svelte'
+  import type { Snippet } from 'svelte'
   import '../app.css'
+
+  let { children }: { children: Snippet } = $props()
 </script>
 
 <svelte:head>
@@ -12,5 +15,7 @@
 </svelte:head>
 
 <Shell>
-  <slot slot="content"></slot>
+  {#snippet content()}
+    {@render children?.()}
+  {/snippet}
 </Shell>

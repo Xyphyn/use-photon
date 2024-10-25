@@ -10,8 +10,5 @@
   class="flex items-center gap-2
    {className}"
 >
-  <Logo width={32} />
-  <div class="flex-1"></div>
-  <Button href="/about" color="tertiary">About</Button>
-  <Button href="https://phtn.app" color="primary">Try it</Button>
+  <a href="/"> <Logo width={32} /></a>
 </nav>

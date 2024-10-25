@@ -27,7 +27,7 @@
       <br/>with Photon
     </h1>
     <p class="">
-      A better way to discover Lemmy.
+      A better way to explore Lemmy.
     </p>
     <div class="flex gap-2 not-prose">
       <Button href="https://phtn.app" size="lg" color="primary">
@@ -38,13 +38,15 @@
   </header>
   <div class="absolute top-0 inset-x-0 h-[36rem] w-full background-dots-mover -z-10"></div>
   <div class="absolute top-0 inset-x-0 h-[36rem] w-full background-dots -z-10"></div>
-    <div class="perspective px-8 w-full overflow-hidden max-w-screen-lg mx-auto">
+    <div class="perspective px-8 w-full max-w-screen-lg mx-auto relative">
       <picture class="contents">
         <source media="(prefers-color-scheme: dark)" srcset="/img/desktop-default-dark.webp">
         <source media="(prefers-color-scheme: light)" srcset="/img/desktop-default-light.webp">
-        <img class="w-full border overflow-hidden
-    border-zinc-100 dark:border-zinc-800 rounded-xl mask" alt="" />
+        <img class="w-full border overflow-hidden object-cover
+    border-zinc-100 dark:border-zinc-800 rounded-xl z-10 mask" alt="" />
       </picture>
+      <div class="hero-preview-animation">
+      </div>
     </div>
 
   <div class="mx-auto flex gap-2 items-center flex-wrap">
@@ -66,8 +68,8 @@
     class="flex flex-col p-8 md:p-12 lg:p-16 2xl:px-32"
   >
     <div class="prose prose-lg dark:prose-invert !max-w-full prose-zinc w-full
-    prose-h1:font-medium">
-      <header>
+    prose-h1:font-medium prose-h1:tracking-tighter">
+      <header class="">
         <h1 class="font-medium">Discover <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">more</span></h1>
       </header>
       <p>
@@ -128,7 +130,7 @@
             </div>
           {/snippet}
         </GridItem>
-        <GridItem class="w-full not-prose text-base">
+        <GridItem class="w-full not-prose text-base md:col-span-2 lg:col-span-1">
           {#snippet label()}
             <Command size={16} /> Command prompt
           {/snippet}
@@ -183,8 +185,8 @@
     <Comment author="Streamwave@feddit.uk" body="...Lemmy is fine. Especially with the Photon frontend." />
   </div> -->
   <footer class="p-8 md:p-16 pt-0 md:pt-0 w-full">
-    <div class="w-full min-h-96 p-8 bg-zinc-200 dark:bg-zinc-900/30
-    border border-zinc-300 dark:border-zinc-800 rounded-2xl
+    <div class="w-full min-h-96 p-8 bg-white dark:bg-zinc-900/30
+    border border-zinc-100 dark:border-zinc-800 rounded-2xl
     space-y-6">
       <Logo width={32} />
       <div class="flex gap-16 flex-row flex-wrap">
@@ -254,14 +256,43 @@
 
   .background-dots {
     background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / .2) 1px, transparent 0);
-    mask-image: linear-gradient(to bottom right, #00000000, #000000ff, #00000000);
+    mask-image: linear-gradient(to var(--direction, bottom right), #00000000, #000000ff, #00000000);
     background-size: 30px 30px;
   }
 
+  @property --hero-pre-anim-rotation {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
 
+  @keyframes hero-pre-anim-rotate {
+    from {
+      --hero-pre-anim-rotation: 0deg;
+    }
+    to {
+      --hero-pre-anim-rotation: 360deg;
+    }
+  }
 
-  .background-dots-mover {
-    mask: radial-gradient(circle at 1px 1px, rgb(0 0 0 / 1) 1px, transparent 0) repeat;
-    background-color: red;
-}
+  .hero-preview-animation {
+    padding: 1px 1px ;
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: 2rem;
+    right: 2rem;
+    z-index: -10;
+    mask-image: linear-gradient(to bottom, rgb(0 0 0 / 1) 0px, rgb(0 0 0 / 0) 2px);
+  }
+
+  .hero-preview-animation::before {
+    position: absolute;
+    inset: 0 0 0;
+    content: '';
+    border-radius: .75rem;
+    animation: hero-pre-anim-rotate 1.8s infinite linear;
+    background-image: conic-gradient(from var(--hero-pre-anim-rotation), rgb(255 0 0 / 0), rgb(255 0 0 / 0), theme(colors.pink.400), theme(colors.orange.400));
+  }
+
 </style>
