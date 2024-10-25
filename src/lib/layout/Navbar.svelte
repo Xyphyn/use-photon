@@ -12,6 +12,6 @@
 >
   <Logo width={32} />
   <div class="flex-1"></div>
-  <Button href="#learn-more" color="tertiary">About</Button>
+  <Button href="/about" color="tertiary">About</Button>
   <Button href="https://phtn.app" color="primary">Try it</Button>
 </nav>

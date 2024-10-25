@@ -1,12 +1,13 @@
 <script>
   import Button from '$lib/ui/Button.svelte'
   import GridItem from '$lib/ui/GridItem.svelte'
+  import Logo from '$lib/ui/Logo.svelte'
   import Comment from '$lib/ui/mock/Comment.svelte'
   import Post from '$lib/ui/mock/Post.svelte'
-  import { ArrowRight, KeyRound, GalleryHorizontalEnd, Command, Link, Image, Heart, Paintbrush, Code, Newspaper } from 'lucide-svelte'
+  import { ArrowRight, KeyRound, GalleryHorizontalEnd, Sparkles, Command, Link, Image, Heart, Paintbrush, Code, Newspaper } from 'lucide-svelte'
 </script>
 
-<div class="flex flex-col items-center min-h-screen">
+<div class="flex flex-col items-center min-h-screen relative z-0">
 
   <!-- <div class="relative max-w-lg w-full">
     <Post class="w-full" author="Jamie@lemmy.blahaj.zone" community="Ask Lemmy" title="What are you doing this weekend?" />
@@ -16,12 +17,13 @@
   <header
     class="flex flex-col p-8 xl:py-16
     prose prose-xl xl:prose-2xl prose-zinc dark:prose-invert
-    prose-h1:mb-0 prose-h1:font-bold tracking-tight
+    prose-h1:mb-0 prose-h1:font-semibold prose-h1:tracking-tighter
     prose-p:max-w-lg xl:prose-p:max-w-xl h-96 relative
-    w-full items-center text-center mb-24"
+    w-full items-center text-center mb-24 header"
   >
     <h1>
-      <span class="bg-gradient-to-r text-transparent bg-clip-text from-purple-400 via-pink-400 to-orange-400">Discover the fediverse</span>
+      <span class="bg-gradient-to-r text-transparent bg-clip-text from-purple-400 via-pink-400 to-orange-400
+      bg-animation">Discover the fediverse</span>
       <br/>with Photon
     </h1>
     <p class="">
@@ -34,16 +36,16 @@
       <Button color="tertiary" size="lg" href="#learn-more">Learn more</Button>
     </div>
   </header>
-  <div class="perspective-container">
-    <div class="perspective px-8 w-full rounded-xl
-    border-b-0 rounded-b-none">
+  <div class="absolute top-0 inset-x-0 h-[36rem] w-full background-dots-mover -z-10"></div>
+  <div class="absolute top-0 inset-x-0 h-[36rem] w-full background-dots -z-10"></div>
+    <div class="perspective px-8 w-full overflow-hidden max-w-screen-lg mx-auto">
       <picture class="contents">
         <source media="(prefers-color-scheme: dark)" srcset="/img/desktop-default-dark.webp">
         <source media="(prefers-color-scheme: light)" srcset="/img/desktop-default-light.webp">
-        <img class="perspective-child border border-zinc-200 dark:border-zinc-700 " alt="" />
+        <img class="w-full border overflow-hidden
+    border-zinc-100 dark:border-zinc-800 rounded-xl mask" alt="" />
       </picture>
     </div>
-  </div>
 
   <div class="mx-auto flex gap-2 items-center flex-wrap">
     <Button color="tertiary" size="lg" href="https://github.com/xyphyn/photon">
@@ -66,8 +68,7 @@
     <div class="prose prose-lg dark:prose-invert !max-w-full prose-zinc w-full
     prose-h1:font-medium">
       <header>
-        <span></span>
-        <h1 class="font-medium">Discover more</h1>
+        <h1 class="font-medium">Discover <span class="bg-gradient-to-r from-pink-400 to-orange-400 bg-clip-text text-transparent">more</span></h1>
       </header>
       <p>
         Photon enriches each element of the platform, providing a more comprehensive media experience.
@@ -181,73 +182,86 @@
     <Post upvotes={72} comments={27} author="qaz@lemmy.world" community="196" title="Photon ftw rule" avatar="https://lemmy.blahaj.zone/pictrs/image/fwrQkf9edg.png?format=webp&thumbnail=64" image="https://pictrs.blahaj.zone/pictrs/image/8b06fcb0-140f-4bbe-b3bd-1c5929b0a427.png?format=webp" href="https://lemmy.world/post/12956274" />
     <Comment author="Streamwave@feddit.uk" body="...Lemmy is fine. Especially with the Photon frontend." />
   </div> -->
-  <footer class="prose prose-md dark:prose-invert prose-zinc">
-    <p>Made with ❤️ by Xylight</p>
+  <footer class="p-8 md:p-16 pt-0 md:pt-0 w-full">
+    <div class="w-full min-h-96 p-8 bg-zinc-200 dark:bg-zinc-900/30
+    border border-zinc-300 dark:border-zinc-800 rounded-2xl
+    space-y-6">
+      <Logo width={32} />
+      <div class="flex gap-16 flex-row flex-wrap">
+        <div class="flex flex-col gap-2">
+          <h3>Project</h3>
+          <a href="https://github.com/xyphyn/photon">GitHub</a>
+          <a href="https://buymeacoffee.com/xylight">Donate</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3>Developer</h3>
+          <a href="https://lemdro.id/u/Xylight">Lemmy</a>
+          <a href="mailto:xylight@xylight.dev">Email</a>
+          <a href="https://matrix.to/#/@xylightsucks:matrix.org">Matrix</a>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3>Community</h3>
+          <a href="https://matrix.to/#/%23photon-lemmy-general:matrix.org">Matrix</a>
+          <a href="https://lemdro.id/c/Photon">Lemmy</a>
+          <a href="mailto:xylight@xylight.dev">Email</a>
+        </div>
+      </div>
+    </div>
   </footer>
 </div>
 
-<style>
-  @keyframes moveInCircle {
-    0% {
-      transform: translate(
-        /* x = centerX + radius * cos(angle) */
-        calc(130px + 100 * cos(0deg)),
-        /* y = centerY + radius * sin(angle) */
-        calc(130px + 100 * sin(0deg))
-      );
-    }
-    25% {
-      transform: translate(
-        calc(130px + 100 * cos(90deg)),
-        calc(130px + 100 * sin(90deg))
-      );
-    }
-    50% {
-      transform: translate(
-        calc(130px + 100 * cos(180deg)),
-        calc(130px + 100 * sin(180deg))
-      );
-    }
-    75% {
-      transform: translate(
-        calc(130px + 100 * cos(270deg)),
-        calc(130px + 100 * sin(270deg))
-      );
-    }
-    100% {
-      transform: translate(
-        calc(130px + 100 * cos(360deg)),
-        calc(130px + 100 * sin(360deg))
-      );
-    }
-    /* ... and so on for other angles */
+<style lang="postcss">
+  footer h3 {
+    @apply text-sm text-zinc-700 dark:text-zinc-300 font-medium
+  }
+  footer a {
+    @apply text-sm text-zinc-600 dark:text-zinc-400 hover:underline
   }
 
-  .perspective-container {
-    pointer-events: none;
-    margin-top: -8rem;
-    contain: strict;
-    width: 100%;
-    height: 48rem;
-    /* height: 100%; */
-    /* overflow: hidden; */
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  .mask {
+    mask-image: linear-gradient(to bottom, #000000ff, #00000000);
+    max-height: 24rem;
+    object-fit: cover;
+    object-position: top;
   }
 
-  .perspective {
-    perspective: 4000px;
-    perspective-origin: 100% 0;
-    position: relative;
-    height: 48rem;
-    width: 96rem;
+  @keyframes move-bg {
+    from {
+      background-position: 0% 0%;
+    }
+    to {
+      background-position: 100% 0%;
+    }
   }
-  
-  .perspective-child {
-    transform: translateX(2%) scale(1.2) rotateX(47deg) rotateY(30deg) rotate(324deg);
-    border-radius: 1rem;
-    z-index: 10;
-    margin-left: 15rem;
-    margin-top: 4rem;
-    object-position: 25% 50%;
+
+  @keyframes blur-in {
+    from {
+      filter: blur(8px);
+      transform: translateY(16px);
+      opacity: .7;
+    }
+    to {
+      filter: blur(0px);
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
+
+  .bg-animation {
+    background-size: 150%;
+    animation: move-bg 2s ease-out forwards;
+  }
+
+  .background-dots {
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / .2) 1px, transparent 0);
+    mask-image: linear-gradient(to bottom right, #00000000, #000000ff, #00000000);
+    background-size: 30px 30px;
+  }
+
+
+
+  .background-dots-mover {
+    mask: radial-gradient(circle at 1px 1px, rgb(0 0 0 / 1) 1px, transparent 0) repeat;
+    background-color: red;
+}
 </style>

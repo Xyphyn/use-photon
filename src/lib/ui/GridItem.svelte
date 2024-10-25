@@ -13,8 +13,8 @@
       {#if label}
         <span class="text-zinc-600 dark:text-zinc-400 text-sm inline-flex items-center gap-1 font-medium">{@render label()}</span>
       {/if}
-      <h3 class="font-semibold text-2xl dark:text-zinc-50 text-zinc-950 flex gap-2 items-center">{@render title()}</h3>
-      <p class="text-lg">{@render children?.()}</p>
+      <h3 class="font-medium text-xl dark:text-zinc-50 text-zinc-950 flex gap-2 items-center">{@render title()}</h3>
+      <p class="text-base">{@render children?.()}</p>
     </div>
     {@render demo?.()}
   </div>
