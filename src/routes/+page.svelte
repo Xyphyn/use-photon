@@ -207,6 +207,11 @@
           <a href="https://lemdro.id/c/Photon">Lemmy</a>
           <a href="mailto:xylight@xylight.dev">Email</a>
         </div>
+        <div class="flex flex-col gap-2">
+          <h3>Other</h3>
+          <a href="mailto:photon@xylight.dev">Contact</a>
+          <a href="/privacy-policy">Privacy</a>
+        </div>
       </div>
     </div>
   </footer>
