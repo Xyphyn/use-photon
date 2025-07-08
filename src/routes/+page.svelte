@@ -1,13 +1,8 @@
 <script lang="ts">
-	import type { Component, Snippet } from 'svelte';
+	import type { Component } from 'svelte';
 	import logo from './logo.svg';
 
 	import {
-		QuestionMarkCircle,
-		ChevronUp,
-		ChevronDown,
-		ChatBubbleOvalLeftEllipsis,
-		CpuChip,
 		ArrowTopRightOnSquare,
 		UserGroup,
 		ViewColumns,
