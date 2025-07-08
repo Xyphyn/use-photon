@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--font-display: 'Inter Display', sans-serif;
+	--font-sans: sans-serif;
+
+	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
+	--color-zinc-925: color-mix(in oklch, var(--color-zinc-900) 70%, var(--color-zinc-950) 30%);
+}
+
+body,
+html {
+	@apply bg-zinc-900 text-zinc-50;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('/font/interregular.woff2') format('woff2');
+	font-display: swap;
+	font-weight: 400;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('/font/intermedium.woff2') format('woff2');
+	font-display: swap;
+	font-weight: medium;
+}
+
+@font-face {
+	font-family: 'Inter Display';
+	src: url('/font/interdisplaymedium.woff2') format('woff2');
+	font-display: swap;
+	font-weight: medium;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
