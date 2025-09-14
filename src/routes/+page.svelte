@@ -115,8 +115,8 @@
 			A concise interface.
 		</h2>
 		<p>
-			Photon is designed to take away the clutter and complexity of the fediverse—without
-			sacrificing features.
+			Photon is designed to take away the clutter and complexity of the fediverse while retaining
+			information density.
 		</p>
 	</heading>
 
