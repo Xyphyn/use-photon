@@ -6,12 +6,12 @@
 	--font-sans: 'Inter', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
-	--color-zinc-925: color-mix(in oklch, var(--color-zinc-900) 70%, var(--color-zinc-950) 30%);
+	--color-zinc-950: color-mix(in oklch, var(--color-zinc-900) 90%, var(--color-black));
 }
 
 body,
 html {
-	@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50;
+	@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 dark:scheme-dark;
 }
 
 @font-face {

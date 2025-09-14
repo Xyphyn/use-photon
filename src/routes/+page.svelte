@@ -106,25 +106,26 @@
 		</div>
 	</heading>
 </section>
-<div class="mx-auto mb-24 max-w-7xl p-6">
-	<div
-		class="block overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:hidden dark:border-zinc-800"
-	>
-		<enhanced:img src="./light-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
-	</div>
-	<div
-		class="hidden overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:block dark:border-zinc-800"
-	>
-		<enhanced:img src="./dark-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
-	</div>
-</div>
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
 		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0 prose-p:text-xl',
-		'prose-headings:font-medium prose-headings:font-display text-center text-balance'
+		'prose-headings:font-medium prose-headings:font-display text-center text-balance',
+		'bg-white lg:mt-64 dark:bg-zinc-950'
 	]}
 >
+	<div class="not-prose mx-auto max-w-7xl p-6 lg:-mt-16 lg:-mb-48 lg:-translate-y-1/2">
+		<div
+			class="block overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:hidden dark:border-zinc-800"
+		>
+			<enhanced:img src="./light-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+		</div>
+		<div
+			class="hidden overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:block dark:border-zinc-800"
+		>
+			<enhanced:img src="./dark-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+		</div>
+	</div>
 	<heading class="max-w-3xl">
 		<h2
 			id="more"
@@ -178,7 +179,7 @@
 										'rounded-xl border p-2',
 										'border-zinc-200 bg-gradient-to-br',
 										'from-zinc-50 to-zinc-100 dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900',
-										'transition-all hover:brightness-125'
+										'transition-all hover:brightness-95 hover:dark:brightness-110'
 									]}
 								>
 									<Icon variation="mini" size="20" />
@@ -298,7 +299,7 @@
 		})}
 	</ol>
 </section>
-<hr class="border-zinc-200 dark:border-zinc-800" />
+<hr class="border-zinc-100 dark:border-zinc-800" />
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
@@ -379,6 +380,11 @@
 			'Weblate',
 			'Help localize Photon into more languages.',
 			'https://weblate.xylight.dev/projects/photon/test/'
+		)}
+		{@render thing(
+			'Donate',
+			'Support the development and future of Photon.',
+			'https://buymeacoffee.com/xylight'
 		)}
 	</div>
 </section>
