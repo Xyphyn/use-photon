@@ -18,24 +18,23 @@
 	<title>Photon</title>
 </svelte:head>
 
-<section class="z-0 flex h-[50vh] items-center justify-center px-4 py-8 sm:p-16">
-	<div class="pointer-events-none absolute top-0 -z-10 w-full overflow-hidden">
-		<div class="absolute -inset-50 z-10 backdrop-blur-3xl"></div>
+<section class="relative z-0 flex h-[60vh] items-center justify-center px-4 py-8 sm:p-16">
+	<div class="pointer-events-none absolute -top-24 isolate -z-10 w-full overflow-hidden">
 		<svg
-			class="pointer-events-none h-auto w-full opacity-30 dark:opacity-20"
+			class="pointer-events-none h-auto w-full opacity-30 blur-3xl dark:opacity-20"
 			width="1200"
 			height="500"
 			viewBox="50 75 1171 241"
 			fill="none"
 		>
 			<defs>
-				<filter id="blur" x="0" y="-311" width="1170" height="550" filterUnits="userSpaceOnUse">
-					<feGaussianBlur stdDeviation="60" />
-				</filter>
+				<!-- grad1: deep blue → cerulean (cool tones) -->
 				<linearGradient id="grad1" x1="568" y1="1" x2="1029" y2="65" gradientUnits="userSpaceOnUse">
-					<stop stop-color="oklch(0.47 0.32 264)" />
-					<stop offset="1" stop-color="oklch(0.84 0.21 170)" />
+					<stop offset="0" stop-color="#0b3b8c" />
+					<stop offset="1" stop-color="#1fb4d4" />
 				</linearGradient>
+
+				<!-- grad2: indigo → violet-blue → pale teal (cool tones) -->
 				<linearGradient
 					id="grad2"
 					x1="155"
@@ -44,11 +43,12 @@
 					y2="-162"
 					gradientUnits="userSpaceOnUse"
 				>
-					<stop stop-color="oklch(0.83 0.16 73)" />
-					<stop offset="0.5" stop-color="oklch(0.64 0.29 359)" />
-					<stop offset="1" stop-color="oklch(0.51 0.30 284)" />
+					<stop offset="0" stop-color="#2e1a7b" />
+					<stop offset="0.5" stop-color="#4a6de0" />
+					<stop offset="1" stop-color="#6fe0e6" />
 				</linearGradient>
 			</defs>
+
 			<g>
 				<path
 					d="M732-180C597-158 516-74 553 7s175 130 310 108 246-105 210-186-139-49-274-27z"
@@ -68,13 +68,14 @@
 		<h1 class="font-display">
 			Your portal
 			<span
-				class="bg-gradient-to-r from-zinc-900 to-indigo-500 bg-clip-text text-transparent dark:from-zinc-50 dark:to-indigo-400"
+				class="bg-gradient-to-r from-zinc-900 to-blue-500 bg-clip-text text-transparent dark:from-zinc-50 dark:to-blue-400"
 			>
 				to the fediverse.
 			</span>
 		</h1>
 		<p class="text-balance">
-			Photon takes the decentralized experience of the fediverse and makes it actually nice to use.
+			Photon connects you to the fediverse with a fast and convenient interface that doesn't
+			compromise on features.
 		</p>
 		<div class="not-prose mx-auto flex w-max gap-4">
 			<Button
@@ -98,7 +99,7 @@
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
-		'prose prose-zinc dark:prose-invert prose-xl prose-ol:p-0 prose-li:px-0',
+		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0',
 		'prose-headings:font-medium prose-headings:font-display text-center text-balance'
 	]}
 >
@@ -106,7 +107,7 @@
 		<h2
 			id="more"
 			class={[
-				'mt-2 bg-gradient-to-r bg-clip-text text-4xl text-transparent',
+				'mt-2 bg-gradient-to-r bg-clip-text text-transparent',
 				'from-zinc-400 via-zinc-900 to-zinc-400',
 				'dark:from-zinc-500 dark:via-zinc-50 dark:to-zinc-500'
 			]}
@@ -130,14 +131,14 @@
 		body: string;
 		img?: Snippet;
 		index: number;
-		examples?: { icon: any; text: string }[];
+		examples?: { icon: any; text: string; href: string }[];
 	})}
 		<li
 			class="flex w-full flex-col items-center gap-4 text-left lg:flex-row lg:gap-12 even:lg:flex-row-reverse xl:gap-20"
 		>
-			<div class="order-2 w-full flex-1 text-wrap xl:order-1">
+			<div class="order-2 w-full flex-1 shrink text-wrap xl:order-1">
 				<h3
-					class="w-max max-w-full bg-gradient-to-l from-zinc-900 to-zinc-500 bg-clip-text text-transparent dark:from-indigo-200 dark:to-zinc-300"
+					class="mt-0! w-max max-w-full bg-gradient-to-l from-zinc-900 to-zinc-500 bg-clip-text text-transparent dark:from-blue-200 dark:to-zinc-300"
 				>
 					{title}
 				</h3>
@@ -149,14 +150,17 @@
 						{#each examples as ex}
 							{@const Icon = ex.icon}
 							<li class="flex flex-row items-center gap-2 text-xl">
-								<div
+								<a
+									href={ex.href}
 									class={[
 										'rounded-xl border p-2',
-										'border-zinc-200 bg-gradient-to-b from-zinc-50 to-zinc-100 dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900'
+										'border-zinc-200 bg-gradient-to-br',
+										'from-zinc-50 to-zinc-100 dark:border-zinc-800 dark:from-zinc-800 dark:to-zinc-900',
+										'transition-all hover:brightness-125'
 									]}
 								>
 									<Icon variation="mini" size="20" />
-								</div>
+								</a>
 								{ex.text}
 							</li>
 						{/each}
@@ -174,8 +178,8 @@
 			<div
 				class={[
 					'relative block h-full w-full flex-1 rounded-xl',
-					'not-prose overflow-hidden border border-zinc-200 shadow-lg dark:border-zinc-800',
-					'order-3'
+					'not-prose overflow-hidden border border-zinc-200 dark:border-zinc-800',
+					'order-3 shrink-0 shadow-lg'
 				]}
 			>
 				{@render img?.()}
@@ -185,7 +189,7 @@
 
 	<ol
 		class={[
-			'prose-lg relative flex w-full max-w-7xl flex-col gap-16',
+			'prose-2xl prose-p:text-lg relative flex w-full max-w-7xl flex-col gap-16',
 			'before:absolute before:h-full before:border-l before:border-slate-200 before:xl:block before:dark:border-zinc-800',
 			'before:left-1/2 before:-z-10 before:hidden before:border-dashed'
 		]}
@@ -214,25 +218,29 @@
 		{/snippet}
 		{@render feature({
 			title: 'Convenient and powerful',
-			body: 'lorem ipsum dolor sit amet',
+			body: 'Features to improve your browsing experience are placed where and when you need them.',
 			index: 2,
 			img: img2,
 			examples: [
 				{
 					icon: UserGroup,
-					text: 'Switch between accounts across servers'
+					text: 'Switch between accounts across servers',
+					href: 'https://phtn.app/accounts'
 				},
 				{
 					icon: Language,
-					text: 'Support for 19 languages'
+					text: 'Support for 19 languages',
+					href: 'https://phtn.app/settings'
 				},
 				{
 					icon: ShieldCheck,
-					text: 'Advanced moderation tools'
+					text: 'Advanced moderation tools',
+					href: 'https://phtn.app/settings/moderation'
 				},
 				{
 					icon: VideoCamera,
-					text: 'Inline media embeds'
+					text: 'Inline media embeds',
+					href: 'https://phtn.app/settings/embeds'
 				}
 			]
 		})}
@@ -247,98 +255,99 @@
 			examples: [
 				{
 					icon: Swatch,
-					text: 'Custom themes'
+					text: 'Custom themes',
+					href: 'https://phtn.app/theme'
 				},
 				{
 					icon: ViewColumns,
-					text: 'Cozy and compact modes'
+					text: 'Cozy and compact modes',
+					href: 'https://phtn.app/settings'
 				},
 				{
 					icon: BarsArrowDown,
-					text: 'Infinite scroll'
+					text: 'Infinite scroll',
+					href: 'https://phtn.app/settings'
 				}
 			]
 		})}
 	</ol>
-
-	<!-- <div class="absolute inset-0 -z-10 mx-auto my-auto h-96 w-96 bg-zinc-600/20 blur-3xl"></div> -->
-	<!-- {#snippet thing(
-		title: string,
-		main: string,
-		description: string[],
-		span: 'none' | 'vertical' | 'horizontal',
-		extended?: Snippet
-	)}
-		<div
+</section>
+<hr class="border-zinc-200 dark:border-zinc-800" />
+<section
+	class={[
+		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
+		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0',
+		'prose-headings:font-medium prose-headings:font-display text-center text-balance'
+	]}
+>
+	<heading class="max-w-3xl">
+		<h2
+			id="more"
 			class={[
-				span == 'horizontal' && 'col-span-2',
-				'group flex flex-row gap-4 rounded-xl',
-				' from-zinc-900 to-zinc-800'
+				'mt-2 bg-gradient-to-r bg-clip-text text-transparent',
+				'from-zinc-400 via-zinc-900 to-zinc-400',
+				'dark:from-zinc-500 dark:via-zinc-50 dark:to-zinc-500'
 			]}
 		>
-			<div class="flex-1 space-y-4">
-				<p class="font-display text-lg text-slate-700 dark:text-zinc-300">{title}</p>
-				<h2
-					class={[
-						'font-display bg-gradient-to-l from-zinc-400 to-slate-900 bg-clip-text text-3xl text-transparent',
-						'group-first:from-purple-400 dark:from-zinc-400 dark:to-zinc-50'
-					]}
-				>
-					{main}
-				</h2>
-				{#each description as p}
-					<p
-						class="dark:text-zinc-lg max-w-md text-lg font-normal text-slate-600 dark:text-zinc-400"
-					>
-						{p}
-					</p>
-				{/each}
-			</div>
-			{#if extended}
-				<div class="flex-1 overflow-hidden rounded-2xl">
-					{@render extended()}
+			Open source community
+		</h2>
+		<p>
+			Photon is and will always be free, open source software, and will never have any ads or
+			tracking.
+		</p>
+	</heading>
+
+	{#snippet thing(name: string, description: string, url?: string, img?: Snippet)}
+		<svelte:element
+			this={url ? 'a' : 'article'}
+			href={url}
+			class={[
+				'flex flex-col gap-3 rounded-3xl border border-zinc-200 p-8 dark:border-zinc-800',
+				'group relative w-full max-w-80 overflow-hidden transition-colors hover:bg-blue-500/2'
+			]}
+		>
+			{#if img}
+				<div class="-mx-5 -mt-5 h-64 overflow-hidden rounded-2xl mask-b-from-0">
+					{@render img()}
 				</div>
 			{/if}
-		</div>
+			<div
+				class={[
+					'bg-radial from-blue-500/20 via-blue-500/0 via-70%',
+					'absolute -top-[33rem] -right-[33rem] aspect-square h-auto w-4xl',
+					'-z-10 opacity-0 transition-opacity group-hover:opacity-100'
+				]}
+			></div>
+			<h3 class={['font-display w-full text-3xl']}>
+				{name}
+			</h3>
+			<p class="text-lg text-zinc-700 dark:text-zinc-300">
+				{description}
+			</p>
+			{#if url}
+				<div
+					class="mt-auto flex flex-row items-center justify-center gap-1 text-base text-blue-600 dark:text-blue-400"
+					aria-hidden="true"
+				>
+					<ArrowTopRightOnSquare size="16" variation="micro" />
+					<div>{new URL(url).hostname}</div>
+				</div>
+			{/if}
+		</svelte:element>
 	{/snippet}
-
-	<div class="flex w-full flex-col gap-24">
-		{#snippet photonImg()}
-			<enhanced:img src="./photon-dark.png" class="" />
-		{/snippet}
+	<div
+		class="not-prose mx-auto flex w-full max-w-5xl flex-wrap items-center justify-center gap-8 text-center"
+	>
 		{@render thing(
-			'Intuitive interface',
-			'The fediverse, made approachable',
-			['Photon has an approachable, customizable design for normal and power users alike.'],
-			'horizontal',
-			photonImg
+			'Matrix',
+			'Talk and chat with other members.',
+			'https://matrix.to/#/#photon-lemmy-general:matrix.org'
 		)}
 		{@render thing(
-			'Lorem ipsum',
-			'dolor sit amet',
-			[
-				'consectetur adipisicing elit. At, aut architecto. Optio impedit laborum.',
-				'Dolorum, quae placeat. Officia nisi quia repellendus delectus magnam.'
-			],
-			'none'
+			'GitHub',
+			'Browse the source code and changelogs, or report bugs.',
+			'https://github.com/Xyphyn/photon'
 		)}
-		{@render thing(
-			'Lorem ipsum',
-			'dolor sit amet',
-			[
-				'consectetur adipisicing elit. At, aut architecto. Optio impedit laborum.',
-				'Dolorum, quae placeat. Officia nisi quia repellendus delectus magnam.'
-			],
-			'none'
-		)}
-		{@render thing(
-			'Lorem ipsum',
-			'dolor sit amet',
-			[
-				'consectetur adipisicing elit. At, aut architecto. Optio impedit laborum.',
-				'Dolorum, quae placeat. Officia nisi quia repellendus delectus magnam.'
-			],
-			'horizontal'
-		)}
-	</div> -->
+		{@render thing('Lemmy', 'Discuss and browse posts about Photon.', 'https://lemdro.id/c/photon')}
+	</div>
 </section>

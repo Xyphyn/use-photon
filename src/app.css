@@ -11,7 +11,7 @@
 
 body,
 html {
-	@apply bg-slate-50 text-slate-900 dark:bg-zinc-900 dark:text-zinc-50;
+	@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-50;
 }
 
 @font-face {
