@@ -10,10 +10,10 @@
 	};
 
 	export const buttonColor = {
-		primary: `border border-transparent bg-zinc-100 text-black hover:brightness-90 dark:active:brightness-75`,
+		primary: `border border-transparent bg-slate-900 dark:bg-zinc-100 text-white dark:text-black hover:brightness-90 dark:active:brightness-75`,
 
-		secondary: `border border-zinc-800 border-t-zinc-700/50 bg-zinc-900
-		hover:bg-zinc-800 hover:border-zinc-700 hover:border-zinc-700 active:bg-zinc-900`,
+		secondary: `border bg-white border-slate-200 border-b-slate-300 hover:bg-slate-100 dark:border-zinc-800 dark:border-t-zinc-700/50 dark:bg-zinc-900
+		dark:hover:bg-zinc-800 dark:hover:border-zinc-700 dark:hover:border-zinc-700 dark:active:bg-zinc-900`,
 
 		tertiary:
 			'border border-transparent bg-transparent hover:bg-slate-100 dark:hover:bg-zinc-700/30 dark:text-zinc-200',
@@ -67,6 +67,7 @@
 		children?: Snippet;
 		suffix?: Snippet;
 		onclick?: HTMLButtonAttributes['onclick'];
+		transition?: boolean;
 	}
 
 	export type { Props as ButtonProps };
@@ -92,6 +93,7 @@
 		prefix,
 		children,
 		suffix,
+		transition,
 		...rest
 	}: Props = $props();
 </script>
@@ -107,7 +109,8 @@
 		buttonSize[size],
 		buttonRounding[rounding],
 		buttonShadow[shadow],
-		'cursor-pointer text-sm font-medium transition-all duration-75 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none',
+		transition && 'transition-all',
+		'cursor-pointer text-sm font-medium duration-75 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none',
 		disabled && 'pointer-events-none opacity-50 shadow-none',
 		alignment == 'center' ? 'origin-center' : alignment == 'left' ? 'origin-left' : 'origin-right',
 		clazz
@@ -132,7 +135,7 @@
 
 <!--
   @component
-  
+
   @slot `prefix` -- Will be replaced if `loading` is `true`.
   @slot `suffix`
 -->

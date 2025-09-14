@@ -3,7 +3,7 @@
 
 @theme {
 	--font-display: 'Inter Display', sans-serif;
-	--font-sans: sans-serif;
+	--font-sans: 'Inter', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
 	--color-zinc-925: color-mix(in oklch, var(--color-zinc-900) 70%, var(--color-zinc-950) 30%);
@@ -11,21 +11,14 @@
 
 body,
 html {
-	@apply bg-zinc-900 text-zinc-50;
+	@apply bg-slate-50 text-slate-900 dark:bg-zinc-900 dark:text-zinc-50;
 }
 
 @font-face {
 	font-family: 'Inter';
 	src: url('/font/interregular.woff2') format('woff2');
 	font-display: swap;
-	font-weight: 400;
-}
-
-@font-face {
-	font-family: 'Inter';
-	src: url('/font/intermedium.woff2') format('woff2');
-	font-display: swap;
-	font-weight: medium;
+	font-weight: normal;
 }
 
 @font-face {
@@ -34,5 +27,3 @@ html {
 	font-display: swap;
 	font-weight: medium;
 }
-
-@custom-variant dark (&:where(.dark, .dark *));
