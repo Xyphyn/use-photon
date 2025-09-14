@@ -19,22 +19,20 @@
 </svelte:head>
 
 <section class="relative z-0 flex h-[60vh] items-center justify-center px-4 py-8 sm:p-16">
-	<div class="pointer-events-none absolute -top-24 isolate -z-10 w-full overflow-hidden">
+	<div class="pointer-events-none absolute -top-24 -z-10 w-full overflow-hidden">
 		<svg
-			class="pointer-events-none h-auto w-full opacity-30 blur-3xl dark:opacity-20"
+			class="dark:opacity-sm pointer-events-none h-[50rem] w-full origin-top scale-150 opacity-30 blur-3xl"
 			width="1200"
 			height="500"
 			viewBox="50 75 1171 241"
 			fill="none"
 		>
 			<defs>
-				<!-- grad1: deep blue → cerulean (cool tones) -->
 				<linearGradient id="grad1" x1="568" y1="1" x2="1029" y2="65" gradientUnits="userSpaceOnUse">
 					<stop offset="0" stop-color="#0b3b8c" />
 					<stop offset="1" stop-color="#1fb4d4" />
 				</linearGradient>
 
-				<!-- grad2: indigo → violet-blue → pale teal (cool tones) -->
 				<linearGradient
 					id="grad2"
 					x1="155"
@@ -47,9 +45,22 @@
 					<stop offset="0.5" stop-color="#4a6de0" />
 					<stop offset="1" stop-color="#6fe0e6" />
 				</linearGradient>
+				<linearGradient
+					id="grad3"
+					x1="155"
+					y1="-11"
+					x2="512"
+					y2="-162"
+					gradientUnits="userSpaceOnUse"
+				>
+					<stop offset="0" stop-color="oklch(0.7 0.1376 210.49)" />
+					<stop offset="0.5" stop-color="oklch(0.7 0.1376 210.49)" />
+					<stop offset="1" stop-color="oklch(0.7 0.1796 293.08)" />
+				</linearGradient>
 			</defs>
 
 			<g>
+				<!-- <ellipse cx="650" cy="150" rx="258" ry="150" fill="url(#grad3)" /> -->
 				<path
 					d="M732-180C597-158 516-74 553 7s175 130 310 108 246-105 210-186-139-49-274-27z"
 					fill="url(#grad1)"
@@ -95,11 +106,22 @@
 		</div>
 	</heading>
 </section>
-<hr class="border-zinc-200 dark:border-zinc-800" />
+<div class="mx-auto mb-24 max-w-7xl p-6">
+	<div
+		class="block overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:hidden dark:border-zinc-800"
+	>
+		<enhanced:img src="./light-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+	</div>
+	<div
+		class="hidden overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:block dark:border-zinc-800"
+	>
+		<enhanced:img src="./dark-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+	</div>
+</div>
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
-		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0',
+		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0 prose-p:text-xl',
 		'prose-headings:font-medium prose-headings:font-display text-center text-balance'
 	]}
 >
@@ -170,7 +192,7 @@
 			<div
 				class={[
 					'font-display order-1 grid h-10 w-10 place-items-center rounded-3xl text-xl lg:order-2',
-					'border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900'
+					'self-start border border-zinc-200 bg-white lg:self-center dark:border-zinc-800 dark:bg-zinc-900'
 				]}
 			>
 				{index}
@@ -196,10 +218,10 @@
 	>
 		{#snippet img1()}
 			<div class="block dark:hidden">
-				<enhanced:img src="./feed-light.png?w=600,480" loading="eager" />
+				<enhanced:img src="./feed-light.png?w=600;480" sizes="min(600px,100vw)" loading="lazy" />
 			</div>
 			<div class="hidden dark:block">
-				<enhanced:img src="./feed-dark.png?w=600,480" loading="eager" />
+				<enhanced:img src="./feed-dark.png?w=600;480" sizes="min(600px,100vw)" loading="lazy" />
 			</div>
 		{/snippet}
 		{@render feature({
@@ -210,10 +232,14 @@
 		})}
 		{#snippet img2()}
 			<div class="block dark:hidden">
-				<enhanced:img src="./convenient.png?w=600,480" loading="eager" />
+				<enhanced:img src="./convenient.png?w=600;480" sizes="min(600px,100vw)" loading="lazy" />
 			</div>
 			<div class="hidden dark:block">
-				<enhanced:img src="./convenient-dark.png?w=600,480" loading="eager" />
+				<enhanced:img
+					src="./convenient-dark.png?w=600;480"
+					sizes="min(600px,100vw)"
+					loading="lazy"
+				/>
 			</div>
 		{/snippet}
 		{@render feature({
@@ -276,7 +302,7 @@
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
-		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0',
+		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0 prose-p:text-xl',
 		'prose-headings:font-medium prose-headings:font-display text-center text-balance'
 	]}
 >
@@ -349,5 +375,10 @@
 			'https://github.com/Xyphyn/photon'
 		)}
 		{@render thing('Lemmy', 'Discuss and browse posts about Photon.', 'https://lemdro.id/c/photon')}
+		{@render thing(
+			'Weblate',
+			'Help localize Photon into more languages.',
+			'https://weblate.xylight.dev/projects/photon/test/'
+		)}
 	</div>
 </section>
