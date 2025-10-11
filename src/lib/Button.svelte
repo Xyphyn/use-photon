@@ -1,22 +1,27 @@
 <script module lang="ts">
+	import type { Snippet } from 'svelte';
+	import type { ClassValue, HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
+
 	export type ButtonColor = keyof typeof buttonColor;
 	export type ButtonAlignment = keyof typeof buttonAlignment;
 	export type ButtonShadow = keyof typeof buttonShadow;
 
 	export const buttonAlignment = {
 		left: 'justify-start text-left origin-left',
-		center: 'justify-center text-center origin-center',
+		center: 'justify-center',
 		right: 'justify-end text-right origin-right'
 	};
 
 	export const buttonColor = {
-		primary: `border border-transparent bg-slate-900 dark:bg-zinc-100 text-white dark:text-black hover:brightness-90 dark:active:brightness-75`,
-
-		secondary: `border bg-white border-slate-200 border-b-slate-300 hover:bg-slate-100 dark:border-zinc-800 dark:border-t-zinc-700/50 dark:bg-zinc-900
-		dark:hover:bg-zinc-800 dark:hover:border-zinc-700 dark:hover:border-zinc-700 dark:active:bg-zinc-900`,
-
-		tertiary:
-			'border border-transparent bg-transparent hover:bg-slate-100 dark:hover:bg-zinc-700/30 dark:text-zinc-200',
+		primary: 'btn-primary',
+		secondary: 'btn-secondary',
+		tertiary: 'btn-tertiary',
+		danger: 'btn-danger',
+		ghost: 'btn-ghost',
+		'danger-subtle': 'text-red-500 hover:bg-red-500 hover:text-inherit!',
+		'success-subtle': 'text-green-500 hover:bg-green-500 hover:text-inherit!',
+		'warning-subtle': 'text-yellow-500 hover:bg-yellow-500 hover:text-inherit!',
+		'blue-subtle': `text-blue-500 hover:bg-blue-500 hover:text-inherit!`,
 
 		none: ''
 	};
@@ -29,19 +34,17 @@
 	export type ButtonSize = keyof typeof buttonSize;
 
 	export const buttonSize = {
-		xs: 'px-2 py-1 text-xs',
-		sm: 'px-3 py-1.5 text-xs',
-		md: 'px-3 py-1.5',
-		lg: 'px-4 py-2',
-		xl: 'px-6 py-3',
-		'square-sm': 'w-6 h-6',
-		'square-md': 'w-8 h-8',
-		'square-lg': 'w-10 h-10',
-		'square-xl': 'w-12 h-12',
+		xs: 'btn-xs',
+		sm: 'btn-sm',
+		md: 'btn-md',
+		lg: 'btn-lg',
+		xl: 'btn-xl',
+		'square-sm': 'btn-square-sm',
+		'square-md': 'btn-square-md',
+		'square-lg': 'btn-square-lg',
+		'square-xl': 'btn-square-xl',
 		custom: ''
 	};
-
-	type ButtonRoundness = 'pill' | 'xl' | 'lg' | 'md' | 'none';
 
 	const buttonRounding = {
 		pill: 'rounded-full',
@@ -50,16 +53,17 @@
 		md: 'rounded-md',
 		none: ''
 	};
+	type ButtonRoundness = keyof typeof buttonRounding;
 
 	interface Props extends Omit<HTMLButtonAttributes | HTMLAnchorAttributes, 'prefix'> {
 		loading?: boolean;
 		submit?: boolean;
+		type?: 'button' | 'none';
 		color?: ButtonColor;
 		size?: ButtonSize;
 		rounding?: ButtonRoundness;
 		alignment?: ButtonAlignment;
 		shadow?: ButtonShadow;
-		column?: boolean;
 		loaderWidth?: number | undefined;
 		href?: string | undefined;
 		class?: ClassValue;
@@ -67,25 +71,21 @@
 		children?: Snippet;
 		suffix?: Snippet;
 		onclick?: HTMLButtonAttributes['onclick'];
-		transition?: boolean;
 	}
 
 	export type { Props as ButtonProps };
 </script>
 
 <script lang="ts">
-	import type { ClassValue, HTMLAnchorAttributes, HTMLButtonAttributes } from 'svelte/elements';
-	import type { Snippet } from 'svelte';
-
 	let {
 		loading = false,
 		submit = false,
+		type = 'button',
 		color = 'secondary',
 		size = 'md',
-		rounding = size == 'lg' ? 'xl' : 'lg',
+		rounding = 'xl',
 		alignment = 'center',
-		shadow = color != 'tertiary' ? 'sm' : 'none',
-		column = false,
+		shadow = color != 'tertiary' ? 'none' : 'none',
 		disabled,
 		loaderWidth = undefined,
 		href = undefined,
@@ -93,7 +93,8 @@
 		prefix,
 		children,
 		suffix,
-		transition,
+		icon,
+		weight = 'md',
 		...rest
 	}: Props = $props();
 </script>
@@ -105,32 +106,21 @@
 	{...rest}
 	tabindex={disabled ? -1 : undefined}
 	class={[
-		loading ? buttonColor.secondary : buttonColor[color],
+		type == 'button' && 'btn',
 		buttonSize[size],
 		buttonRounding[rounding],
 		buttonShadow[shadow],
-		transition && 'transition-all',
-		'cursor-pointer text-sm font-medium duration-75 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none',
-		disabled && 'pointer-events-none opacity-50 shadow-none',
+		buttonColor[color],
+		buttonAlignment[alignment],
+		(disabled || loading) && 'btn-disabled',
 		alignment == 'center' ? 'origin-center' : alignment == 'left' ? 'origin-left' : 'origin-right',
 		clazz
 	]}
 	type={submit ? 'submit' : 'button'}
 >
-	<div
-		class={[
-			'flex',
-			column ? 'flex-col justify-center' : 'flex-row items-center',
-			'button-content h-full gap-1.5',
-			buttonAlignment[alignment]
-		]}
-	>
-		{#if prefix}
-			{@render prefix?.()}
-		{/if}
-		{@render children?.()}
-		{@render suffix?.()}
-	</div>
+	{@render prefix?.()}
+	{@render children?.()}
+	{@render suffix?.()}
 </svelte:element>
 
 <!--
@@ -139,3 +129,176 @@
   @slot `prefix` -- Will be replaced if `loading` is `true`.
   @slot `suffix`
 -->
+
+<style>
+	@reference "../app.css";
+
+	:global {
+		.btn {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			font-size: var(--text-sm);
+			gap: calc(var(--spacing) * 1.5);
+
+			transition: 75ms cubic-bezier(0.075, 0.82, 0.165, 1);
+
+			@variant hover {
+				cursor: pointer;
+			}
+		}
+
+		.no-hover:hover {
+			cursor: normal !important;
+		}
+
+		.btn-primary {
+			border: 1px solid transparent;
+			background: radial-gradient(
+				circle at 50% -10%,
+				var(--color-zinc-700),
+				var(--color-zinc-900)
+			) !important;
+			color: var(--color-slate-50);
+
+			@variant dark {
+				background: radial-gradient(circle at 50% 10%, var(--color-zinc-300), var(--color-zinc-50))
+					!important !important;
+				color: var(--color-zinc-900);
+			}
+
+			@variant hover {
+				filter: brightness(120%);
+				@variant dark {
+					filter: brightness(90%);
+				}
+			}
+		}
+
+		.btn-secondary {
+			border: 1px solid var(--color-slate-200);
+			border-bottom-color: var(--color-slate-300);
+			background-color: var(--color-white);
+
+			@variant dark {
+				border: 1px solid var(--color-zinc-800);
+				background-color: var(--color-zinc-900);
+			}
+
+			@variant hover {
+				background-color: var(--color-slate-50);
+				@variant dark {
+					background-color: var(--color-zinc-950);
+				}
+			}
+		}
+
+		.btn-tertiary {
+			background-color: transparent;
+			@variant hover {
+				background-color: --alpha(var(--color-slate-200) / 50%);
+				@variant dark {
+					background-color: --alpha(var(--color-zinc-700) / 30%);
+				}
+			}
+		}
+
+		.btn-danger {
+			/*  border border-red-500 bg-red-500 hover:text-red-500 hover:bg-transparent text-white */
+
+			background-color: var(--color-red-600);
+			color: var(--color-white);
+
+			@variant dark {
+				background-color: var(--color-red-400);
+				color: var(--color-black);
+			}
+
+			@variant hover {
+				filter: brightness(120%);
+				@variant dark {
+					filter: brightness(90%);
+				}
+			}
+		}
+
+		.btn-ghost {
+			/* border border-slate-200 dark:border-zinc-800 bg-transparent
+		hover:bg-slate-100 dark:hover:bg-zinc-800 dark:hover:border-zinc-700 dark:text-zinc-400 hover:text-inherit
+		dark:hover:text-inherit */
+
+			border: 1px solid var(--color-slate-200);
+			background-color: transparent;
+
+			@variant hover {
+				background-color: var(--color-slate-100);
+			}
+
+			@variant dark {
+				border-color: var(--color-zinc-800);
+				@variant hover {
+					background-color: var(--color-zinc-800);
+					border-color: var(--color-zinc-700);
+					color: var(--color-zinc-200);
+				}
+			}
+		}
+
+		.btn-xs {
+			padding: calc(var(--spacing) * 1) calc(var(--spacing) * 2);
+			font-size: var(--text-xs);
+		}
+
+		.btn-sm {
+			padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 3);
+			font-size: 12px;
+		}
+
+		.btn-md {
+			padding-block: calc(var(--spacing) * 1.5);
+			padding-inline: calc(var(--spacing) * 3);
+			font-size: var(--text-sm);
+		}
+
+		.btn-lg {
+			padding-block: calc(var(--spacing) * 1.5);
+			padding-inline: calc(var(--spacing) * 3.5);
+			font-size: var(--text-sm);
+		}
+
+		.btn-xl {
+			padding: calc(var(--spacing) * 3) calc(var(--spacing) * 6);
+			font-size: var(--text-base);
+		}
+
+		.btn-square-sm {
+			width: calc(var(--spacing) * 6);
+			height: calc(var(--spacing) * 6);
+		}
+
+		.btn-square-md {
+			width: calc(var(--spacing) * 8);
+			height: calc(var(--spacing) * 8);
+		}
+
+		.btn-square-lg {
+			width: calc(var(--spacing) * 10);
+			height: calc(var(--spacing) * 10);
+		}
+
+		.btn-square-xl {
+			width: calc(var(--spacing) * 12);
+			height: calc(var(--spacing) * 12);
+		}
+
+		.btn-disabled {
+			pointer-events: none;
+			opacity: 0.6;
+			cursor: normal;
+
+			@variant dark {
+				opacity: 0.5;
+			}
+		}
+	}
+</style>

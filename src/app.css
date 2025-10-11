@@ -2,8 +2,8 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-	--font-display: 'Inter Display', sans-serif;
-	--font-sans: 'Inter', sans-serif;
+	--font-display: 'Inter Display', serif;
+	--font-sans: 'Manrope', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
 	--color-zinc-950: color-mix(in oklch, var(--color-zinc-900) 90%, var(--color-black));
@@ -12,18 +12,17 @@
 body,
 html {
 	@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 dark:scheme-dark;
+	scrollbar-width: none;
 }
 
 @font-face {
-	font-family: 'Inter';
-	src: url('/font/interregular.woff2') format('woff2');
+	font-family: 'manrope';
+	src: url('/font/manrope.woff2') format('woff2');
 	font-display: swap;
-	font-weight: normal;
 }
 
 @font-face {
 	font-family: 'Inter Display';
 	src: url('/font/interdisplaymedium.woff2') format('woff2');
 	font-display: swap;
-	font-weight: medium;
 }

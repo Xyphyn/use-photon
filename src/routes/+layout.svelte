@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
+	import Button from '$lib/Button.svelte';
 
 	import '../app.css';
 
@@ -7,7 +8,10 @@
 </script>
 
 <nav
-	class="font-display z-50 mx-auto flex max-w-7xl flex-row flex-wrap items-center justify-between gap-6 p-4"
+	class={[
+		'font-display sticky top-0 z-50 mx-auto flex flex-row flex-wrap items-center justify-between gap-6 p-4',
+		''
+	]}
 >
 	{#snippet link(href: string, text: string, major: boolean = false, ph: boolean = false)}
 		{@const selected = page.url.pathname == href}
@@ -39,7 +43,7 @@
 		</a>
 	{/snippet}
 	{@render link('/', 'Photon', true, true)}
-	{@render link('https://github.com/Xyphyn/photon', 'Source code')}
+	<Button color="primary" rounding="pill">Try Photon</Button>
 </nav>
 <main class="relative z-0 h-full min-h-screen w-full font-sans">
 	{@render children()}

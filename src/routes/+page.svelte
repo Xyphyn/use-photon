@@ -2,6 +2,7 @@
 	import type { Snippet } from 'svelte';
 
 	import Button from '$lib/Button.svelte';
+	import Placeholder from '$lib/Placeholder.svelte';
 	import {
 		ArrowTopRightOnSquare,
 		BarsArrowDown,
@@ -18,114 +19,53 @@
 	<title>Photon</title>
 </svelte:head>
 
-<section class="relative z-0 flex h-[60vh] items-center justify-center px-4 py-8 sm:p-16">
-	<div class="pointer-events-none absolute -top-24 -z-10 w-full overflow-hidden">
-		<svg
-			class="dark:opacity-sm pointer-events-none h-[50rem] w-full origin-top scale-150 opacity-30 blur-3xl"
-			width="1200"
-			height="500"
-			viewBox="50 75 1171 241"
-			fill="none"
-		>
-			<defs>
-				<linearGradient id="grad1" x1="568" y1="1" x2="1029" y2="65" gradientUnits="userSpaceOnUse">
-					<stop offset="0" stop-color="#0b3b8c" />
-					<stop offset="1" stop-color="#1fb4d4" />
-				</linearGradient>
+<section class="section-dots relative z-0 flex h-[calc(100vh-8rem)] items-center px-4 py-8 sm:p-16">
+	<div class="glow pointer-events-none"></div>
 
-				<linearGradient
-					id="grad2"
-					x1="155"
-					y1="-11"
-					x2="512"
-					y2="-162"
-					gradientUnits="userSpaceOnUse"
-				>
-					<stop offset="0" stop-color="#2e1a7b" />
-					<stop offset="0.5" stop-color="#4a6de0" />
-					<stop offset="1" stop-color="#6fe0e6" />
-				</linearGradient>
-				<linearGradient
-					id="grad3"
-					x1="155"
-					y1="-11"
-					x2="512"
-					y2="-162"
-					gradientUnits="userSpaceOnUse"
-				>
-					<stop offset="0" stop-color="oklch(0.7 0.1376 210.49)" />
-					<stop offset="0.5" stop-color="oklch(0.7 0.1376 210.49)" />
-					<stop offset="1" stop-color="oklch(0.7 0.1796 293.08)" />
-				</linearGradient>
-			</defs>
-
-			<g>
-				<!-- <ellipse cx="650" cy="150" rx="258" ry="150" fill="url(#grad3)" /> -->
-				<path
-					d="M732-180C597-158 516-74 553 7s175 130 310 108 246-105 210-186-139-49-274-27z"
-					fill="url(#grad1)"
-				/>
-				<ellipse cx="450" cy="-38" rx="258" ry="76" fill="url(#grad2)" />
-			</g>
-		</svg>
-	</div>
-
-	<heading
-		class={[
-			'prose prose-2xl prose-h1:font-medium prose-h1:font-display prose-h1:mb-0 prose-zinc dark:prose-invert text-center',
-			'w-full text-balance'
-		]}
-	>
-		<h1 class="font-display">
-			Your portal
+	<heading class={['w-full items-start space-y-16']}>
+		<span class="rounded-full bg-zinc-200/50 px-6 py-3 font-mono text-lg dark:bg-zinc-800/50">
+			v2.1.0
+		</span>
+		<h1 class="font-display text-7xl leading-[1.2] tracking-tighter lg:text-9xl">
+			A portal
 			<span
-				class="bg-gradient-to-r from-zinc-900 to-blue-500 bg-clip-text text-transparent dark:from-zinc-50 dark:to-blue-400"
+				class="bg-gradient-to-r from-zinc-900 to-indigo-500 bg-clip-text text-transparent dark:from-zinc-50 dark:to-indigo-400"
 			>
-				to the fediverse.
+				to the <br />
+				fediverse.
 			</span>
 		</h1>
-		<p class="text-balance">
+		<p class="max-w-2xl text-2xl leading-[1.5] text-balance text-zinc-600 dark:text-zinc-400">
 			Photon connects you to the fediverse with a fast and convenient interface that doesn't
 			compromise on features.
 		</p>
-		<div class="not-prose mx-auto flex w-max gap-4">
+		<div class="not-prose ml-auto flex w-max gap-4">
 			<Button
 				transition={false}
 				color="primary"
 				rounding="pill"
 				href="https://phtn.app"
 				target="_blank"
-				size="lg"
+				size="custom"
+				class="px-4 py-2.5 text-2xl!"
 			>
 				Try Photon
 				<ArrowTopRightOnSquare variation="micro" size="18" />
 			</Button>
-			<Button transition={false} color="secondary" rounding="pill" href="#more" size="lg">
-				Learn more
-			</Button>
 		</div>
 	</heading>
 </section>
+<hr
+	class="h-px border-0 bg-gradient-to-r from-zinc-50 via-zinc-300 to-zinc-50 dark:from-zinc-950 dark:via-zinc-700 dark:to-zinc-950"
+/>
 <section
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
 		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0 prose-p:text-xl',
 		'prose-headings:font-medium prose-headings:font-display text-center text-balance',
-		'bg-white lg:mt-64 dark:bg-zinc-950'
+		'bg-gradient-to-b from-zinc-50 via-indigo-50 lg:mt-64 dark:bg-zinc-950 dark:from-zinc-950 dark:via-indigo-950/20'
 	]}
 >
-	<div class="not-prose mx-auto max-w-7xl p-6 lg:-mt-16 lg:-mb-48 lg:-translate-y-1/2">
-		<div
-			class="block overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:hidden dark:border-zinc-800"
-		>
-			<enhanced:img src="./light-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
-		</div>
-		<div
-			class="hidden overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:block dark:border-zinc-800"
-		>
-			<enhanced:img src="./dark-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
-		</div>
-	</div>
 	<heading class="max-w-3xl">
 		<h2
 			id="more"
@@ -138,10 +78,22 @@
 			A concise interface.
 		</h2>
 		<p>
-			Photon is designed to take away the clutter and complexity of the fediverse while retaining
-			information density.
+			Photon is designed to take away the clutter and complexity of the fediverse without
+			compromising information density.
 		</p>
 	</heading>
+	<div class="not-prose mx-auto max-w-7xl p-6">
+		<div
+			class="block overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:hidden dark:border-zinc-800"
+		>
+			<enhanced:img src="./light-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+		</div>
+		<div
+			class="hidden overflow-hidden rounded-xl border border-slate-200 shadow-xl dark:block dark:border-zinc-800"
+		>
+			<enhanced:img src="./dark-hero.png?w=1400;800;640;400" sizes="min(1280px,100vw)" />
+		</div>
+	</div>
 
 	{#snippet feature({
 		title,
@@ -329,15 +281,17 @@
 			this={url ? 'a' : 'article'}
 			href={url}
 			class={[
-				'flex flex-col gap-3 rounded-3xl border border-zinc-200 p-8 dark:border-zinc-800',
-				'group relative w-full max-w-80 overflow-hidden transition-colors hover:bg-blue-500/2'
+				'flex flex-col gap-2 rounded-3xl border border-zinc-200 p-6 dark:border-zinc-800',
+				'group relative w-full max-w-80 overflow-hidden text-left transition-colors hover:bg-blue-500/2'
 			]}
 		>
-			{#if img}
-				<div class="-mx-5 -mt-5 h-64 overflow-hidden rounded-2xl mask-b-from-0">
+			<div class="-m-6 overflow-hidden rounded-2xl mask-b-from-0">
+				{#if img}
 					{@render img()}
-				</div>
-			{/if}
+				{:else}
+					<Placeholder seed={name} />
+				{/if}
+			</div>
 			<div
 				class={[
 					'bg-radial from-blue-500/20 via-blue-500/0 via-70%',
@@ -345,15 +299,15 @@
 					'-z-10 opacity-0 transition-opacity group-hover:opacity-100'
 				]}
 			></div>
-			<h3 class={['font-display w-full text-3xl']}>
+			<h3 class={['font-display w-full text-2xl']}>
 				{name}
 			</h3>
-			<p class="text-lg text-zinc-700 dark:text-zinc-300">
+			<p class="text-base text-zinc-700 dark:text-zinc-300">
 				{description}
 			</p>
 			{#if url}
 				<div
-					class="mt-auto flex flex-row items-center justify-center gap-1 text-base text-blue-600 dark:text-blue-400"
+					class="mt-auto flex flex-row items-center gap-1 text-base text-blue-600 dark:text-blue-400"
 					aria-hidden="true"
 				>
 					<ArrowTopRightOnSquare size="16" variation="micro" />
@@ -367,7 +321,7 @@
 	>
 		{@render thing(
 			'Matrix',
-			'Talk and chat with other members.',
+			'Talk and chat with other members about anything.',
 			'https://matrix.to/#/#photon-lemmy-general:matrix.org'
 		)}
 		{@render thing(
@@ -388,3 +342,44 @@
 		)}
 	</div>
 </section>
+
+<style>
+	@reference '../app.css';
+	.glow {
+		animation: brighten ease-out 1s forwards;
+
+		position: absolute;
+		width: 100%;
+		inset: 0;
+		top: -10rem;
+		height: 80rem;
+		max-width: 100%;
+		z-index: -1;
+		overflow: hidden;
+		background: radial-gradient(
+			ellipse at top left in oklch,
+			--alpha(var(--color-indigo-400) / 30%),
+			--alpha(var(--color-blue-300) / 0%),
+			transparent
+		);
+		background-position: 0% 0%;
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
+		pointer-events: none;
+	}
+
+	.section-dots::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		top: -10rem;
+		overflow: hidden;
+		z-index: -10;
+		mask-image: radial-gradient(ellipse at top left, black, transparent);
+		background-image: radial-gradient(var(--color-zinc-500) 1px, transparent 0);
+		@variant dark {
+			background-image: radial-gradient(var(--color-zinc-700) 1px, transparent 0);
+		}
+		background-size: 80px 80px;
+	}
+</style>
