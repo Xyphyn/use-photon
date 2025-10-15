@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-	--font-display: 'Inter Display', serif;
+	--font-display: 'Manrope', serif;
 	--font-sans: 'Manrope', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));

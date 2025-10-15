@@ -162,7 +162,7 @@
 			color: var(--color-slate-50);
 
 			@variant dark {
-				background: radial-gradient(circle at 50% 10%, var(--color-zinc-300), var(--color-zinc-50))
+				background: radial-gradient(circle at bottom, var(--color-zinc-300), var(--color-zinc-50))
 					!important !important;
 				color: var(--color-zinc-900);
 			}

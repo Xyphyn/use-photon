@@ -62,7 +62,7 @@
 	class={[
 		'relative z-0 mx-auto flex w-full max-w-full flex-col items-center justify-center px-4 py-8 sm:p-16',
 		'prose prose-zinc dark:prose-invert prose-2xl prose-ol:p-0 prose-li:px-0 prose-p:text-xl',
-		'prose-headings:font-medium prose-headings:font-display text-center text-balance',
+		'prose-headings:font-medium prose-headings:font-display prose-headings:tracking-tighter text-center text-balance',
 		'bg-gradient-to-b from-zinc-50 via-indigo-50 lg:mt-64 dark:bg-zinc-950 dark:from-zinc-950 dark:via-indigo-950/20'
 	]}
 >
@@ -369,7 +369,7 @@
 	}
 
 	.section-dots::before {
-		content: '';
+		/* content: '';
 		position: absolute;
 		inset: 0;
 		top: -10rem;
@@ -380,6 +380,6 @@
 		@variant dark {
 			background-image: radial-gradient(var(--color-zinc-700) 1px, transparent 0);
 		}
-		background-size: 80px 80px;
+		background-size: 80px 80px; */
 	}
 </style>
