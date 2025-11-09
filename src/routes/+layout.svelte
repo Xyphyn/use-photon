@@ -9,8 +9,7 @@
 
 <nav
 	class={[
-		'font-display sticky top-0 z-50 mx-auto flex flex-row flex-wrap items-center justify-between gap-6 p-4',
-		''
+		'sticky top-0 z-50 mx-auto flex flex-row flex-wrap items-center justify-between gap-6 p-4'
 	]}
 >
 	{#snippet link(href: string, text: string, major: boolean = false, ph: boolean = false)}

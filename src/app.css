@@ -2,7 +2,7 @@
 @plugin '@tailwindcss/typography';
 
 @theme {
-	--font-display: 'Manrope', serif;
+	--font-display: 'Baskervville', serif;
 	--font-sans: 'Manrope', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
@@ -25,4 +25,18 @@ html {
 	font-family: 'Inter Display';
 	src: url('/font/interdisplaymedium.woff2') format('woff2');
 	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Baskervville';
+	src: url('/font/baskervville.woff2') format('woff2');
+	font-display: swap;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Baskervville';
+	src: url('/font/baskervville-italic.woff2') format('woff2');
+	font-display: swap;
+	font-style: italic;
 }

@@ -48,6 +48,7 @@
 
 	const buttonRounding = {
 		pill: 'rounded-full',
+		'2xl': 'rounded-2xl',
 		xl: 'rounded-xl',
 		lg: 'rounded-lg',
 		md: 'rounded-md',
