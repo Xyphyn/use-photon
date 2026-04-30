@@ -8,21 +8,28 @@
 
 <style>
 	@reference '../../app.css';
-
 	section {
 		position: relative;
 		z-index: 0;
 
-		max-width: 100%;
+		max-width: 96rem;
+		box-shadow: 0px 0px 0px 1px var(--color-zinc-800);
 
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+		@apply divide-x divide-y divide-zinc-800;
 
-		padding: calc(var(--spacing) * 4) calc(var(--spacing) * 8);
-		@variant sm {
-			padding: calc(var(--spacing) * 16) calc(var(--spacing) * 16);
+		display: grid;
+		grid-template-columns: 1fr;
+		@variant md {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		:global(& > *) {
+			height: 100%;
+
+			padding: calc(var(--spacing) * 4) calc(var(--spacing) * 8);
+			@variant sm {
+				padding: calc(var(--spacing) * 16) calc(var(--spacing) * 16);
+			}
 		}
 
 		:global {

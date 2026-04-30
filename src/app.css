@@ -1,18 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
 @theme {
-	--font-display: 'Baskervville', serif;
+	--font-display: 'Instrument Sans', serif;
 	--font-sans: 'Manrope', sans-serif;
 
 	--color-zinc-850: color-mix(in oklch, var(--color-zinc-800), var(--color-zinc-900));
 	--color-zinc-950: color-mix(in oklch, var(--color-zinc-900) 90%, var(--color-black));
 }
 
+@custom-variant dark (&:is(.dark *));
+
 body,
 html {
-	@apply bg-zinc-50 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 dark:scheme-dark;
+	@apply bg-zinc-950 dark:text-zinc-50 dark:scheme-dark;
+	background: linear-gradient(
+		to right,
+		var(--color-zinc-900) 0%,
+		var(--color-black),
+		var(--color-zinc-900) 100%
+	);
 	scrollbar-width: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	display: block;
 }
 
 @font-face {

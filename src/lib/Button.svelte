@@ -84,7 +84,7 @@
 		type = 'button',
 		color = 'secondary',
 		size = 'md',
-		rounding = 'xl',
+		rounding = 'lg',
 		alignment = 'center',
 		shadow = color != 'tertiary' ? 'none' : 'none',
 		disabled,
@@ -119,9 +119,17 @@
 	]}
 	type={submit ? 'submit' : 'button'}
 >
-	{@render prefix?.()}
+	{#if prefix}
+		<div class="contents text-zinc-400">
+			{@render prefix?.()}
+		</div>
+	{/if}
 	{@render children?.()}
-	{@render suffix?.()}
+	{#if suffix}
+		<div class="contents text-zinc-400">
+			{@render suffix?.()}
+		</div>
+	{/if}
 </svelte:element>
 
 <!--
@@ -155,18 +163,9 @@
 
 		.btn-primary {
 			border: 1px solid transparent;
-			background: radial-gradient(
-				circle at 50% -10%,
-				var(--color-zinc-700),
-				var(--color-zinc-900)
-			) !important;
-			color: var(--color-slate-50);
 
-			@variant dark {
-				background: radial-gradient(circle at bottom, var(--color-zinc-300), var(--color-zinc-50))
-					!important !important;
-				color: var(--color-zinc-900);
-			}
+			background: var(--color-zinc-50);
+			color: var(--color-zinc-900);
 
 			@variant hover {
 				filter: brightness(120%);
@@ -177,20 +176,16 @@
 		}
 
 		.btn-secondary {
-			border: 1px solid var(--color-slate-200);
-			border-bottom-color: var(--color-slate-300);
-			background-color: var(--color-white);
-
-			@variant dark {
-				border: 1px solid var(--color-zinc-800);
-				background-color: var(--color-zinc-900);
-			}
+			box-shadow: 0px 0px 0px 1px
+				color-mix(in oklab, var(--color-zinc-800) 50%, var(--color-zinc-900) 50%);
+			background-color: var(--color-zinc-900);
 
 			@variant hover {
-				background-color: var(--color-slate-50);
-				@variant dark {
-					background-color: var(--color-zinc-950);
-				}
+				background-color: color-mix(in oklab, var(--color-zinc-925), var(--color-zinc-900));
+			}
+
+			@variant active {
+				background-color: var(--color-zinc-925);
 			}
 		}
 

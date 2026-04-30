@@ -14,7 +14,7 @@
 </script>
 
 <svelte:element this={url ? 'a' : 'article'} href={url} class="end-card group">
-	<div class="-m-6 overflow-hidden rounded-2xl mask-b-from-0">
+	<div class="-m-6 overflow-hidden mask-b-from-0">
 		{#if img}
 			{@render img()}
 		{:else}
@@ -24,7 +24,7 @@
 	<div
 		class={[
 			'bg-radial from-blue-500/20 via-blue-500/0 via-70%',
-			'absolute -top-[33rem] -right-[33rem] aspect-square h-auto w-4xl',
+			'absolute -top-[33rem] -right-[33rem] aspect-square h-auto',
 			'-z-10 opacity-0 transition-opacity group-hover:opacity-100'
 		]}
 	></div>
@@ -48,12 +48,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: calc(var(--spacing) * 2);
-		border-radius: var(--radius-3xl);
-		border: 1px solid var(--color-zinc-200);
+		box-shadow: 0px 0px 0px 1px var(--color-zinc-800);
 		padding: calc(var(--spacing) * 6);
 		position: relative;
 		width: 100%;
-		max-width: calc(var(--spacing) * 80);
 		overflow: hidden;
 		text-align: left;
 		transition: colors 0.5s linear;

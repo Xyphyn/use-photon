@@ -12,14 +12,14 @@
 	let { title, body, img, index, examples }: Props = $props();
 </script>
 
-<li class="feature">
-	<div class="order-2 w-full flex-1 shrink text-wrap xl:order-1">
+<li class="contents">
+	<div class="w-full flex-1 shrink text-wrap">
 		<h3
-			class="mt-0! w-max max-w-full bg-gradient-to-l from-zinc-900 to-zinc-500 bg-clip-text text-transparent dark:from-blue-200 dark:to-zinc-300"
+			class="mt-0! max-w-full bg-gradient-to-l from-zinc-900 to-zinc-500 bg-clip-text text-center text-transparent md:text-left! dark:from-blue-200 dark:to-zinc-300"
 		>
 			{title}
 		</h3>
-		<p>
+		<p class="text-center md:text-left">
 			{body}
 		</p>
 		{#if examples}
@@ -38,20 +38,15 @@
 	</div>
 	<div
 		class={[
-			'font-display order-1 grid h-10 w-10 place-items-center rounded-3xl text-xl lg:order-2',
-			'self-start border border-zinc-200 bg-white lg:self-center dark:border-zinc-800 dark:bg-zinc-900'
-		]}
-	>
-		{index}
-	</div>
-	<div
-		class={[
-			'relative block h-full w-full flex-1 rounded-xl',
-			'not-prose overflow-hidden border border-zinc-200 dark:border-zinc-800',
-			'order-3 shrink-0 shadow-lg'
+			'ignore-grid-padding',
+			'not-prose w-full max-w-full min-w-0 overflow-hidden',
+			'relative z-0 flex shrink-0  shadow-lg'
 		]}
 	>
 		{@render img?.()}
+		<div class="absolute -z-10 scale-200 overflow-hidden opacity-20 blur-3xl">
+			{@render img?.()}
+		</div>
 	</div>
 </li>
 

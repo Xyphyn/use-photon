@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Button from '$lib/Button.svelte';
+	import { ArrowTopRightOnSquare } from 'svelte-heros-v2';
 
 	import '../app.css';
 
@@ -9,7 +10,7 @@
 
 <nav
 	class={[
-		'sticky top-0 z-50 mx-auto flex flex-row flex-wrap items-center justify-between gap-6 p-4'
+		'sticky top-0 z-50 mx-auto flex h-14 max-w-[96rem] items-center justify-between gap-6 bg-zinc-950'
 	]}
 >
 	{#snippet link(href: string, text: string, major: boolean = false, ph: boolean = false)}
@@ -20,7 +21,7 @@
 				selected ? 'text-zinc-900 dark:text-zinc-50' : 'text-zinc-600 dark:text-zinc-400',
 				major ? 'text-xl first:mr-auto last:ml-auto' : 'text-lg',
 				'group rounded-xl py-2 hover:text-zinc-900 hover:dark:text-zinc-50',
-				ph ? 'px-2' : 'px-4'
+				ph ? 'px-4' : 'px-4'
 			]}
 		>
 			{#if ph}
@@ -42,9 +43,21 @@
 		</a>
 	{/snippet}
 	{@render link('/', 'Photon', true, true)}
-	<Button color="primary" rounding="pill">Try Photon</Button>
+	<Button
+		color="tertiary"
+		rounding="none"
+		size="xl"
+		class="h-full border-l border-zinc-800 font-medium"
+	>
+		{#snippet prefix()}
+			<ArrowTopRightOnSquare size="16" variation="micro" />
+		{/snippet}
+		Try Photon
+	</Button>
 </nav>
-<main class="relative z-0 h-full min-h-screen w-full font-sans">
+<main
+	class="relative z-0 mx-auto h-full min-h-screen w-full max-w-[96rem] font-sans dark:bg-zinc-950"
+>
 	{@render children()}
 </main>
 <footer class="flex w-full flex-row gap-4 p-8 text-slate-600 dark:text-zinc-400">
@@ -60,5 +73,9 @@
 <style>
 	footer a:hover {
 		text-decoration-line: underline;
+	}
+
+	nav {
+		box-shadow: 0px 0px 0px 1px var(--color-zinc-800);
 	}
 </style>
